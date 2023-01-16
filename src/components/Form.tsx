@@ -8,7 +8,7 @@ interface todoType {
 let idNext = 0;
 
 export function Form() {
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState<string>("");
   const [todolist, setTodoList] = useState<todoType[]>([]);
 
   function handleSubmit(e: SyntheticEvent) {
@@ -32,7 +32,16 @@ export function Form() {
         {todolist.map((item) => {
           return (
             <>
-              <li>{item.title}</li>
+              <li>
+                {item.title}
+                <button
+                  onClick={() => {
+                    setTodoList(todolist.filter((a) => a.id !== item.id));
+                  }}
+                >
+                  del
+                </button>
+              </li>
             </>
           );
         })}
